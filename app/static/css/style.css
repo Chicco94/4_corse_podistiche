@@ -213,6 +213,13 @@ body {
     flex: 1;
 }
 
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
 .btn-secondary {
     background-color: #6c757d;
     color: white;
@@ -273,7 +280,7 @@ select:focus {
     color: #333;
 }
 
-.race-date {
+.race-place {
     font-size: 1.1rem;
     color: #667eea;
     margin: 0;
@@ -313,14 +320,17 @@ select:focus {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
-.review-rating {
-    background: #ffc107;
+.review-route {
+    background: #e7f3ff;
     padding: 0.25rem 0.75rem;
     border-radius: 20px;
-    font-weight: bold;
     font-size: 0.9rem;
+    color: #0066cc;
+    font-weight: bold;
 }
 
 .review-date {
@@ -329,9 +339,40 @@ select:focus {
     margin: 0;
 }
 
-.review-content {
-    margin-top: 0.5rem;
+.review-ratings {
+    background: white;
+    padding: 1rem;
+    border-radius: 5px;
+    margin: 0.75rem 0;
+}
+
+.rating-group {
+    margin-bottom: 1rem;
+}
+
+.rating-group:last-child {
+    margin-bottom: 0;
+}
+
+.rating-group h4 {
+    margin: 0 0 0.5rem 0;
+    color: #333;
+ 
+
+.add-review h5 {
+    margin: 1.5rem 0 1rem 0;
+    color: #333;
+    font-size: 1rem;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 0.5rem;
+}   font-size: 0.95rem;
+}
+
+.rating-group p {
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
     color: #555;
+    padding-left: 1rem;
 }
 
 .no-reviews {

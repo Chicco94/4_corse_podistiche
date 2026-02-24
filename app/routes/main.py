@@ -62,24 +62,18 @@ def create_race():
     
     if request.method == 'POST':
         name = request.form.get('name', '').strip()
-        date_str = request.form.get('date', '').strip()
+        place = request.form.get('place', '').strip()
         
         # Validazione
         if not name:
             return render_template('create_race.html', error='Inserisci il nome della gara')
-        if not date_str:
-            return render_template('create_race.html', error='Inserisci la data della gara')
-        
-        try:
-            from datetime import datetime
-            race_date = datetime.strptime(date_str, '%Y-%m-%d')
-        except ValueError:
-            return render_template('create_race.html', error='Formato data non valido (YYYY-MM-DD)')
+        if not place:
+            return render_template('create_race.html', error='Inserisci il luogo della gara')
         
         # Crea la gara
         race = Race(
             name=name,
-            date=race_date,
+            place=place,
             creator_id=session['user_id']
         )
         db.session.add(race)
@@ -104,24 +98,49 @@ def add_review(race_id):
         return redirect(url_for('main.login'))
     
     race = Race.query.get_or_404(race_id)
+    
+    # Estrai i dati dal form
+    route = request.form.get('route', '').strip()
     content = request.form.get('content', '').strip()
-    rating = request.form.get('rating', '5')
     
     # Validazione
+    if not route:
+        return render_template('race_detail.html', race=race, error='Inserisci il percorso valutato')
     if not content:
-        return render_template('race_detail.html', race=race, error='Inserisci un commento')
+        return render_template('race_detail.html', race=race, error='Inserisci le note')
     
+    # Estrai i rating
     try:
-        rating = int(rating)
-        if rating < 1 or rating > 5:
-            rating = 5
+        rating_percorso_segnaletica = int(request.form.get('rating_percorso_segnaletica', 5))
+        rating_percorso_fondo = int(request.form.get('rating_percorso_fondo', 5))
+        rating_percorso_distanza = int(request.form.get('rating_percorso_distanza', 5))
+        rating_ristori_numero = int(request.form.get('rating_ristori_numero', 5))
+        rating_ristori_varieta = int(request.form.get('rating_ristori_varieta', 5))
+        rating_ristoro_abusivo = int(request.form.get('rating_ristoro_abusivo', 5))
+        rating_ristoro_finale = int(request.form.get('rating_ristoro_finale', 5))
+        rating_extra_organizzazione = int(request.form.get('rating_extra_organizzazione', 5))
+        
+        # Valida i rating (1-5)
+        for rating in [rating_percorso_segnaletica, rating_percorso_fondo, rating_percorso_distanza,
+                       rating_ristori_numero, rating_ristori_varieta, rating_ristoro_abusivo,
+                       rating_ristoro_finale, rating_extra_organizzazione]:
+            if rating < 1 or rating > 5:
+                rating = 5
     except ValueError:
-        rating = 5
+        return render_template('race_detail.html', race=race, error='Valori rating non validi')
     
     # Crea la recensione
     review = Review(
+        route=route,
         content=content,
-        rating=rating,
+        rating_percorso_segnaletica=rating_percorso_segnaletica,
+        rating_percorso_fondo=rating_percorso_fondo,
+        rating_percorso_distanza=rating_percorso_distanza,
+        rating_ristori_numero=rating_ristori_numero,
+        rating_ristori_varieta=rating_ristori_varieta,
+        rating_ristoro_abusivo=rating_ristoro_abusivo,
+        rating_ristoro_finale=rating_ristoro_finale,
+        rating_extra_organizzazione=rating_extra_organizzazione,
         race_id=race_id,
         user_id=session['user_id']
     )

@@ -6,7 +6,7 @@ class Race(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), nullable=False)
-    date = db.Column(db.DateTime, nullable=False)
+    place = db.Column(db.String(120), nullable=False)
     creator_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
@@ -14,4 +14,4 @@ class Race(db.Model):
     reviews = db.relationship('Review', backref='race', foreign_keys='Review.race_id', lazy=True)
     
     def __repr__(self):
-        return f'<Race {self.name} - {self.date.strftime("%d/%m/%Y")}>'
+        return f'<Race {self.name} - {self.place}>'

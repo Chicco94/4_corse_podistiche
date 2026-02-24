@@ -6,7 +6,7 @@
 <div class="race-detail">
     <div class="race-header">
         <h2>{{ race.name }}</h2>
-        <p class="race-date">📅 {{ race.date.strftime('%d/%m/%Y') }}</p>
+        <p class="race-place">📍 {{ race.place }}</p>
     </div>
     
     <div class="race-info">
@@ -23,10 +23,33 @@
                     <div class="review-card">
                         <div class="review-header">
                             <strong>{{ review.user.username }}</strong>
-                            <span class="review-rating">⭐ {{ review.rating }}/5</span>
+                            <span class="review-route">{{ review.route }}</span>
                         </div>
                         <p class="review-date">{{ review.created_at.strftime('%d/%m/%Y %H:%M') }}</p>
-                        <p class="review-content">{{ review.content }}</p>
+                        
+                        <div class="review-ratings">
+                            <div class="rating-group">
+                                <h4>Percorso</h4>
+                                <p>Segnaletica: 🚩 {{ review.rating_percorso_segnaletica }}/5</p>
+                                <p>Fondo: 🚩 {{ review.rating_percorso_fondo }}/5</p>
+                                <p>Distanza: 🚩 {{ review.rating_percorso_distanza }}/5</p>
+                            </div>
+                            
+                            <div class="rating-group">
+                                <h4>Ristori</h4>
+                                <p>Numero: 🚩 {{ review.rating_ristori_numero }}/5</p>
+                                <p>Varietà: 🚩 {{ review.rating_ristori_varieta }}/5</p>
+                                <p>Abusivi: 🚩 {{ review.rating_ristoro_abusivo }}/5</p>
+                                <p>Finale: 🚩 {{ review.rating_ristoro_finale }}/5</p>
+                            </div>
+                            
+                            <div class="rating-group">
+                                <h4>Extra</h4>
+                                <p>Organizzazione: 🚩 {{ review.rating_extra_organizzazione }}/5</p>
+                            </div>
+                        </div>
+                        
+                        <p class="review-content"><strong>Note:</strong> {{ review.content }}</p>
                     </div>
                 {% endfor %}
             </div>
@@ -38,8 +61,109 @@
             <div class="add-review">
                 <h4>Lascia una Recensione</h4>
                 <form method="POST" action="{{ url_for('main.add_review', race_id=race.id) }}">
+                    
                     <div class="form-group">
-                        <label for="content">Commento:</label>
+                        <label for="route">Percorso Valutato:</label>
+                        <select id="route" name="route" required>
+                            <option value="">-- Seleziona un percorso --</option>
+                            <option value="corto">Corto</option>
+                            <option value="medio">Medio</option>
+                            <option value="lungo">Lungo</option>
+                        </select>
+                    </div>
+                    
+                    <h5>Valutazione Percorso</h5>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="rating_percorso_segnaletica">Segnaletica:</label>
+                            <select id="rating_percorso_segnaletica" name="rating_percorso_segnaletica">
+                                <option value="5">🚩🚩🚩🚩🚩 Eccellente</option>
+                                <option value="4">🚩🚩🚩🚩 Buono</option>
+                                <option value="3">🚩🚩🚩 Normale</option>
+                                <option value="2">🚩🚩 Scadente</option>
+                                <option value="1">🚩 Pessimo</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="rating_percorso_fondo">Fondo:</label>
+                            <select id="rating_percorso_fondo" name="rating_percorso_fondo">
+                                <option value="5">🚩🚩🚩🚩🚩 Eccellente</option>
+                                <option value="4">🚩🚩🚩🚩 Buono</option>
+                                <option value="3">🚩🚩🚩 Normale</option>
+                                <option value="2">🚩🚩 Scadente</option>
+                                <option value="1">🚩 Pessimo</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="rating_percorso_distanza">Distanza:</label>
+                            <select id="rating_percorso_distanza" name="rating_percorso_distanza">
+                                <option value="5">🚩🚩🚩🚩🚩 Eccellente</option>
+                                <option value="4">🚩🚩🚩🚩 Buono</option>
+                                <option value="3">🚩🚩🚩 Normale</option>
+                                <option value="2">🚩🚩 Scadente</option>
+                                <option value="1">🚩 Pessimo</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <h5>Valutazione Ristori</h5>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="rating_ristori_numero">Numero:</label>
+                            <select id="rating_ristori_numero" name="rating_ristori_numero">
+                                <option value="5">🚩🚩🚩🚩🚩 Eccellente</option>
+                                <option value="4">🚩🚩🚩🚩 Buono</option>
+                                <option value="3">🚩🚩🚩 Normale</option>
+                                <option value="2">🚩🚩 Scadente</option>
+                                <option value="1">🚩 Pessimo</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="rating_ristori_varieta">Varietà:</label>
+                            <select id="rating_ristori_varieta" name="rating_ristori_varieta">
+                                <option value="5">🚩🚩🚩🚩🚩 Eccellente</option>
+                                <option value="4">🚩🚩🚩🚩 Buono</option>
+                                <option value="3">🚩🚩🚩 Normale</option>
+                                <option value="2">🚩🚩 Scadente</option>
+                                <option value="1">🚩 Pessimo</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="rating_ristoro_abusivo">Ristori Abusivi:</label>
+                            <select id="rating_ristoro_abusivo" name="rating_ristoro_abusivo">
+                                <option value="5">🚩🚩🚩🚩🚩 Eccellente</option>
+                                <option value="4">🚩🚩🚩🚩 Buono</option>
+                                <option value="3">🚩🚩🚩 Normale</option>
+                                <option value="2">🚩🚩 Scadente</option>
+                                <option value="1">🚩 Pessimo</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="rating_ristoro_finale">Ristoro Finale:</label>
+                            <select id="rating_ristoro_finale" name="rating_ristoro_finale">
+                                <option value="5">🚩🚩🚩🚩🚩 Eccellente</option>
+                                <option value="4">🚩🚩🚩🚩 Buono</option>
+                                <option value="3">🚩🚩🚩 Normale</option>
+                                <option value="2">🚩🚩 Scadente</option>
+                                <option value="1">🚩 Pessimo</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <h5>Valutazione Extra</h5>
+                    <div class="form-group">
+                        <label for="rating_extra_organizzazione">Organizzazione:</label>
+                        <select id="rating_extra_organizzazione" name="rating_extra_organizzazione">
+                            <option value="5">🚩🚩🚩🚩🚩 Eccellente</option>
+                            <option value="4">🚩🚩🚩🚩 Buono</option>
+                            <option value="3">🚩🚩🚩 Normale</option>
+                            <option value="2">🚩🚩 Scadente</option>
+                            <option value="1">🚩 Pessimo</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="content">Note:</label>
                         <textarea 
                             id="content" 
                             name="content" 
@@ -47,17 +171,6 @@
                             placeholder="Condividi la tua esperienza..."
                             required
                         ></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="rating">Voto:</label>
-                        <select id="rating" name="rating">
-                            <option value="5">⭐⭐⭐⭐⭐ Eccellente</option>
-                            <option value="4">⭐⭐⭐⭐ Buono</option>
-                            <option value="3">⭐⭐⭐ Normale</option>
-                            <option value="2">⭐⭐ Scadente</option>
-                            <option value="1">⭐ Pessimo</option>
-                        </select>
                     </div>
                     
                     <button type="submit" class="btn btn-primary">Aggiungi Recensione</button>
