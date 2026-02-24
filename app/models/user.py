@@ -10,6 +10,7 @@ class User(db.Model):
     
     # Relazione con le corse create
     races_created = db.relationship('Race', backref='creator', lazy=True, foreign_keys='Race.creator_id')
+    reviews_created = db.relationship('Review', backref='user', lazy=True, foreign_keys='Review.user_id')
     
     def __repr__(self):
         return f'<User {self.username}>'

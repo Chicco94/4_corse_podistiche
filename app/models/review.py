@@ -11,9 +11,6 @@ class Review(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     
-    # Relazioni
-    race = db.relationship('Race')  # backref definito in Race
-    user = db.relationship('User', backref=db.backref('reviews', lazy=True))
     
     def __repr__(self):
         return f'<Review by {self.user.username} on {self.race.name}>'
