@@ -2,7 +2,7 @@ import os
 
 class Config:
     """Configurazione base"""
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'dev-secret-key'
+    SECRET_KEY = os.environ.get('3d6f45a5fc12445dbac2f59c3b6c7cb1') or 'dev-secret-key'
     DEBUG = False
     # MySQL PythonAnywhere
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://Chicco94:Cmhyac_631@Chicco94.mysql.pythonanywhere-services.com/Chicco94$corse_podistiche'
