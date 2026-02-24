@@ -12,7 +12,7 @@ class Review(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     
     # Relazioni
-    race = db.relationship('Race', backref=db.backref('reviews', lazy=True, cascade='all, delete-orphan'))
+    race = db.relationship('Race')  # backref definito in Race
     user = db.relationship('User', backref=db.backref('reviews', lazy=True))
     
     def __repr__(self):
