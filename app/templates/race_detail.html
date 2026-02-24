@@ -20,36 +20,44 @@
         {% if race.reviews %}
             <div class="reviews-list">
                 {% for review in race.reviews %}
+                    {% set avg = (review.rating_percorso_segnaletica + review.rating_percorso_fondo + review.rating_percorso_distanza + review.rating_ristori_numero + review.rating_ristori_varieta + review.rating_ristoro_abusivo + review.rating_ristoro_finale + review.rating_extra_organizzazione) / 8.0 %}
                     <div class="review-card">
-                        <div class="review-header">
-                            <strong>{{ review.user.username }}</strong>
-                            <span class="review-route">{{ review.route }}</span>
+                        <div class="review-summary">
+                            <div class="review-header">
+                                <strong>{{ review.user.username }}</strong>
+                                <span class="review-route">{{ review.route }}</span>
+                            </div>
+                            <div class="review-average">🚩 {{ avg|round(1) }}/5</div>
+                            <button type="button" class="btn btn-secondary toggle-details">Mostra dettagli</button>
                         </div>
-                        <p class="review-date">{{ review.created_at.strftime('%d/%m/%Y %H:%M') }}</p>
-                        
-                        <div class="review-ratings">
-                            <div class="rating-group">
-                                <h4>Percorso</h4>
-                                <p>Segnaletica: 🚩 {{ review.rating_percorso_segnaletica }}/5</p>
-                                <p>Fondo: 🚩 {{ review.rating_percorso_fondo }}/5</p>
-                                <p>Distanza: 🚩 {{ review.rating_percorso_distanza }}/5</p>
+
+                        <div class="review-details" hidden>
+                            <p class="review-date">{{ review.created_at.strftime('%d/%m/%Y %H:%M') }}</p>
+                            
+                            <div class="review-ratings">
+                                <div class="rating-group">
+                                    <h4>Percorso</h4>
+                                    <p>Segnaletica: 🚩 {{ review.rating_percorso_segnaletica }}/5</p>
+                                    <p>Fondo: 🚩 {{ review.rating_percorso_fondo }}/5</p>
+                                    <p>Distanza: 🚩 {{ review.rating_percorso_distanza }}/5</p>
+                                </div>
+                                
+                                <div class="rating-group">
+                                    <h4>Ristori</h4>
+                                    <p>Numero: 🚩 {{ review.rating_ristori_numero }}/5</p>
+                                    <p>Varietà: 🚩 {{ review.rating_ristori_varieta }}/5</p>
+                                    <p>Abusivi: 🚩 {{ review.rating_ristoro_abusivo }}/5</p>
+                                    <p>Finale: 🚩 {{ review.rating_ristoro_finale }}/5</p>
+                                </div>
+                                
+                                <div class="rating-group">
+                                    <h4>Extra</h4>
+                                    <p>Organizzazione: 🚩 {{ review.rating_extra_organizzazione }}/5</p>
+                                </div>
                             </div>
                             
-                            <div class="rating-group">
-                                <h4>Ristori</h4>
-                                <p>Numero: 🚩 {{ review.rating_ristori_numero }}/5</p>
-                                <p>Varietà: 🚩 {{ review.rating_ristori_varieta }}/5</p>
-                                <p>Abusivi: 🚩 {{ review.rating_ristoro_abusivo }}/5</p>
-                                <p>Finale: 🚩 {{ review.rating_ristoro_finale }}/5</p>
-                            </div>
-                            
-                            <div class="rating-group">
-                                <h4>Extra</h4>
-                                <p>Organizzazione: 🚩 {{ review.rating_extra_organizzazione }}/5</p>
-                            </div>
+                            <p class="review-content"><strong>Note:</strong> {{ review.content }}</p>
                         </div>
-                        
-                        <p class="review-content"><strong>Note:</strong> {{ review.content }}</p>
                     </div>
                 {% endfor %}
             </div>

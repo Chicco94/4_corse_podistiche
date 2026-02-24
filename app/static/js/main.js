@@ -39,3 +39,31 @@ console.log('App caricata correttamente');
 
 	input.addEventListener('input', debounce(filter, 150));
 })();
+
+// Toggle review details (collapsible)
+;(function(){
+	function toggleDetails(e){
+		const btn = e.currentTarget;
+		const card = btn.closest('.review-card');
+		if(!card) return;
+		const details = card.querySelector('.review-details');
+		if(!details) return;
+		const isHidden = details.hasAttribute('hidden');
+		if(isHidden){
+			details.removeAttribute('hidden');
+			btn.textContent = 'Nascondi dettagli';
+			card.classList.add('open');
+		} else {
+			details.setAttribute('hidden','');
+			btn.textContent = 'Mostra dettagli';
+			card.classList.remove('open');
+		}
+	}
+
+	document.addEventListener('click', function(e){
+		const t = e.target;
+		if(t && t.classList && t.classList.contains('toggle-details')){
+			toggleDetails(e);
+		}
+	});
+})();

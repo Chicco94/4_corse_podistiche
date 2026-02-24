@@ -15,3 +15,28 @@ class Race(db.Model):
     
     def __repr__(self):
         return f'<Race {self.name} - {self.place}>'
+
+    @property
+    def reviews_count(self):
+        return len(self.reviews or [])
+
+    @property
+    def average_rating(self):
+        """Restituisce la media aggregata di tutte le recensioni per questa gara (float) o None se nessuna recensione."""
+        if not self.reviews:
+            return None
+        totals = 0.0
+        for r in self.reviews:
+            # ogni recensione ha 8 valori di rating
+            s = (
+                (r.rating_percorso_segnaletica or 0)
+                + (r.rating_percorso_fondo or 0)
+                + (r.rating_percorso_distanza or 0)
+                + (r.rating_ristori_numero or 0)
+                + (r.rating_ristori_varieta or 0)
+                + (r.rating_ristoro_abusivo or 0)
+                + (r.rating_ristoro_finale or 0)
+                + (r.rating_extra_organizzazione or 0)
+            )
+            totals += (s / 8.0)
+        return totals / len(self.reviews)

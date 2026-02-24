@@ -368,12 +368,33 @@ select:focus {
 }   font-size: 0.95rem;
 }
 
+.rating-group h4 {
+    margin: 0 0 0.5rem 0;
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.add-review h5 {
+    margin: 1.5rem 0 1rem 0;
+    color: #333;
+    font-size: 1rem;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 0.5rem;
+}
+
 .rating-group p {
     margin: 0.25rem 0;
     font-size: 0.9rem;
     color: #555;
     padding-left: 1rem;
 }
+
+/* Collapsible review details */
+.review-summary { display:flex; align-items:center; gap:1rem; justify-content:space-between; }
+.review-average { font-weight:700; color:#ff8c00; }
+.toggle-details { flex-shrink:0; }
+.review-details[hidden] { display:none; }
+.review-card.open { box-shadow: 0 8px 18px rgba(0,0,0,0.12); }
 
 .no-reviews {
     color: #999;
@@ -429,6 +450,10 @@ select:focus {
 .race-name { font-size:1.05rem; color:#333; }
 .race-place { color:#667eea; font-weight:600; }
 .race-meta { margin-top:0.5rem; color:#777; font-size:0.9rem; }
+.race-side { text-align:right; min-width:110px; }
+.race-average { font-weight:800; color:#ff8c00; font-size:1rem; }
+.race-count { font-size:0.85rem; color:#666; }
+.race-average.no-reviews { color:#999; font-weight:600; }
 
 /* Filter input */
 .filter-box { display:flex; justify-content:center; margin:1.5rem 0; }

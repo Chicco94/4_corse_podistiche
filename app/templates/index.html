@@ -25,10 +25,19 @@
                 <li class="race-item">
                     <a href="{{ url_for('main.race_detail', race_id=race.id) }}" class="race-link">
                         <div class="race-main">
-                            <strong class="race-name">{{ race.name }}</strong>
-                            <span class="race-place">{{ race.place }}</span>
+                            <div>
+                                <strong class="race-name">{{ race.name }}</strong>
+                                <div class="race-meta">Creato da {{ race.creator.username }} - {{ race.created_at.strftime('%d/%m/%Y') }}</div>
+                            </div>
+                            <div class="race-side">
+                                {% if race.average_rating is not none %}
+                                    <div class="race-average">🚩 {{ race.average_rating|round(1) }}/5</div>
+                                    <div class="race-count">({{ race.reviews_count }} recensioni)</div>
+                                {% else %}
+                                    <div class="race-average no-reviews">Nessuna recensione</div>
+                                {% endif %}
+                            </div>
                         </div>
-                        <div class="race-meta">Creato da {{ race.creator.username }} - {{ race.created_at.strftime('%d/%m/%Y') }}</div>
                     </a>
                 </li>
             {% endfor %}
