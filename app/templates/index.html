@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero">
+    {% if user %}
+        <h2>Benvenuto, {{ user.username }}!</h2>
+        <p>Gestione Corse Podistiche</p>
+    {% else %}
+        <h2>Benvenuto</h2>
+        <p><a href="{{ url_for('main.login') }}">Accedi</a> per continuare</p>
+    {% endif %}
+</div>
+{% endblock %}
