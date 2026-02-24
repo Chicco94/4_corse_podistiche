@@ -13,4 +13,29 @@
         <p><a href="{{ url_for('main.login') }}">Accedi</a> per continuare</p>
     {% endif %}
 </div>
+
+<section class="races-section container">
+    <div class="filter-box">
+        <input id="race-filter" type="search" placeholder="Filtra per nome, luogo o autore..." aria-label="Filtra corse">
+    </div>
+    <h3 class="section-title">Corse registrate</h3>
+    {% if races and races|length > 0 %}
+        <ul class="race-list">
+            {% for race in races %}
+                <li class="race-item">
+                    <a href="{{ url_for('main.race_detail', race_id=race.id) }}" class="race-link">
+                        <div class="race-main">
+                            <strong class="race-name">{{ race.name }}</strong>
+                            <span class="race-place">{{ race.place }}</span>
+                        </div>
+                        <div class="race-meta">Creato da {{ race.creator.username }} - {{ race.created_at.strftime('%d/%m/%Y') }}</div>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="info">Nessuna gara presente. Crea la prima!</p>
+    {% endif %}
+</section>
+
 {% endblock %}

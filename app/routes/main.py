@@ -10,7 +10,9 @@ def index():
     user = None
     if 'user_id' in session:
         user = User.query.get(session['user_id'])
-    return render_template('index.html', user=user)
+    # Lista delle gare più recenti
+    races = Race.query.order_by(Race.created_at.desc()).all()
+    return render_template('index.html', user=user, races=races)
 
 
 @bp.route('/update_server', methods=['POST'])
