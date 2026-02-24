@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Crea Gara - Corse Podistiche{% endblock %}
+
+{% block content %}
+<div class="create-race-container">
+    <div class="create-race-box">
+        <h2>Crea una Nuova Gara</h2>
+        
+        {% if error %}
+            <div class="alert alert-error">{{ error }}</div>
+        {% endif %}
+        
+        <form method="POST" action="{{ url_for('main.create_race') }}">
+            <div class="form-group">
+                <label for="name">Nome Gara:</label>
+                <input 
+                    type="text" 
+                    id="name" 
+                    name="name" 
+                    placeholder="Ad es. Maratona Cittadina" 
+                    required
+                    autofocus
+                >
+            </div>
+            
+            <div class="form-group">
+                <label for="date">Data della Gara:</label>
+                <input 
+                    type="date" 
+                    id="date" 
+                    name="date" 
+                    required
+                >
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Crea Gara</button>
+                <a href="{{ url_for('main.index') }}" class="btn btn-secondary">Annulla</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

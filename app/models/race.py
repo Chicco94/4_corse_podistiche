@@ -10,5 +10,8 @@ class Race(db.Model):
     creator_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     
+    # Relazione con le recensioni
+    reviews = db.relationship('Review', backref='race', lazy=True, cascade='all, delete-orphan')
+    
     def __repr__(self):
         return f'<Race {self.name} - {self.date.strftime("%d/%m/%Y")}>'

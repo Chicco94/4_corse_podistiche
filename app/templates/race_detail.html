@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}{{ race.name }} - Corse Podistiche{% endblock %}
+
+{% block content %}
+<div class="race-detail">
+    <div class="race-header">
+        <h2>{{ race.name }}</h2>
+        <p class="race-date">📅 {{ race.date.strftime('%d/%m/%Y') }}</p>
+    </div>
+    
+    <div class="race-info">
+        <p><strong>Creato da:</strong> {{ race.creator.username }}</p>
+        <p><strong>Data creazione:</strong> {{ race.created_at.strftime('%d/%m/%Y %H:%M') }}</p>
+    </div>
+    
+    <div class="race-reviews">
+        <h3>Recensioni ({{ race.reviews|length }})</h3>
+        
+        {% if race.reviews %}
+            <div class="reviews-list">
+                {% for review in race.reviews %}
+                    <div class="review-card">
+                        <div class="review-header">
+                            <strong>{{ review.user.username }}</strong>
+                            <span class="review-rating">⭐ {{ review.rating }}/5</span>
+                        </div>
+                        <p class="review-date">{{ review.created_at.strftime('%d/%m/%Y %H:%M') }}</p>
+                        <p class="review-content">{{ review.content }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="no-reviews">Nessuna recensione ancora. Sii il primo a lasciarne una!</p>
+        {% endif %}
+        
+        {% if user %}
+            <div class="add-review">
+                <h4>Lascia una Recensione</h4>
+                <form method="POST" action="{{ url_for('main.add_review', race_id=race.id) }}">
+                    <div class="form-group">
+                        <label for="content">Commento:</label>
+                        <textarea 
+                            id="content" 
+                            name="content" 
+                            rows="4" 
+                            placeholder="Condividi la tua esperienza..."
+                            required
+                        ></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="rating">Voto:</label>
+                        <select id="rating" name="rating">
+                            <option value="5">⭐⭐⭐⭐⭐ Eccellente</option>
+                            <option value="4">⭐⭐⭐⭐ Buono</option>
+                            <option value="3">⭐⭐⭐ Normale</option>
+                            <option value="2">⭐⭐ Scadente</option>
+                            <option value="1">⭐ Pessimo</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Aggiungi Recensione</button>
+                </form>
+            </div>
+        {% else %}
+            <p class="login-prompt"><a href="{{ url_for('main.login') }}">Accedi</a> per lasciare una recensione.</p>
+        {% endif %}
+    </div>
+    
+    <div class="race-actions">
+        <a href="{{ url_for('main.index') }}" class="btn btn-secondary">Torna alla Home</a>
+    </div>
+</div>
+{% endblock %}
