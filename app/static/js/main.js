@@ -44,6 +44,7 @@ console.log('App caricata correttamente');
 ;(function(){
 	function toggleDetails(e){
 		const btn = e.target;
+		console.log('Toggle details for', btn);
 		const card = btn.closest('.review-card');
 		if(!card) return;
 		const details = card.querySelector('.review-details');
