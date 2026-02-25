@@ -9,11 +9,6 @@
         <p class="race-place">📍 {{ race.place }}</p>
     </div>
     
-    <div class="race-info">
-        <p><strong>Creato da:</strong> {{ race.creator.username }}</p>
-        <p><strong>Data creazione:</strong> {{ race.created_at.strftime('%d/%m/%Y %H:%M') }}</p>
-    </div>
-    
     <div class="race-reviews">
         <h3>Recensioni ({{ race.reviews|length }})</h3>
         
@@ -191,6 +186,11 @@
     
     <div class="race-actions">
         <a href="{{ url_for('main.index') }}" class="btn btn-secondary">Torna alla Home</a>
+    </div>
+    
+    <div class="race-info">
+        <p><strong>Creato da:</strong> {{ race.creator.username }}</p>
+        <p><strong>Data creazione:</strong> {{ race.created_at.strftime('%d/%m/%Y %H:%M') }}</p>
     </div>
 </div>
 {% endblock %}

@@ -89,6 +89,17 @@ body {
     margin: 0.5rem;
 }
 
+.hero-footer {
+    background: none !important;
+    text-align: right !important;
+    padding: 2rem 0 !important;
+    margin-top: 3rem;
+}
+
+.hero-footer .hero-actions {
+    margin-top: 0;
+}
+
 /* Login Form */
 .login-container {
     display: flex;
