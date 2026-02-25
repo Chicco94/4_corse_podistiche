@@ -62,8 +62,10 @@
         
         {% if user %}
             <div class="add-review">
-                <h4>Lascia una Recensione</h4>
-                <form method="POST" action="{{ url_for('main.add_review', race_id=race.id) }}">
+                <button type="button" class="btn btn-secondary toggle-add-review">Aggiungi una Recensione</button>
+                <div class="add-review-form" hidden>
+                    <h4>Lascia una Recensione</h4>
+                    <form method="POST" action="{{ url_for('main.add_review', race_id=race.id) }}">
                     
                     <div class="form-group">
                         <label for="route">Percorso Valutato:</label>
@@ -177,7 +179,8 @@
                     </div>
                     
                     <button type="submit" class="btn btn-primary">Aggiungi Recensione</button>
-                </form>
+                    </form>
+                </div>
             </div>
         {% else %}
             <p class="login-prompt"><a href="{{ url_for('main.login') }}">Accedi</a> per lasciare una recensione.</p>

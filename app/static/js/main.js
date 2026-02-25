@@ -67,3 +67,26 @@ console.log('App caricata correttamente');
 		}
 	});
 })();
+
+// Toggle add review form
+;(function(){
+	document.addEventListener('click', function(e){
+		const btn = e.target;
+		if(btn && btn.classList && btn.classList.contains('toggle-add-review')){
+			const addReviewDiv = btn.closest('.add-review');
+			if(!addReviewDiv) return;
+			const form = addReviewDiv.querySelector('.add-review-form');
+			if(!form) return;
+			const isHidden = form.hasAttribute('hidden');
+			if(isHidden){
+				form.removeAttribute('hidden');
+				btn.textContent = 'Nascondi Recensione';
+				addReviewDiv.classList.add('open');
+			} else {
+				form.setAttribute('hidden','');
+				btn.textContent = 'Aggiungi una Recensione';
+				addReviewDiv.classList.remove('open');
+			}
+		}
+	});
+})();
