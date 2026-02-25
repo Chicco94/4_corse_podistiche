@@ -43,7 +43,7 @@ console.log('App caricata correttamente');
 // Toggle review details (collapsible)
 ;(function(){
 	function toggleDetails(e){
-		const btn = e.currentTarget;
+		const btn = e.target;
 		const card = btn.closest('.review-card');
 		if(!card) return;
 		const details = card.querySelector('.review-details');
