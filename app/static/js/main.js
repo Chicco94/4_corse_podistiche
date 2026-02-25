@@ -90,3 +90,22 @@ console.log('App caricata correttamente');
 		}
 	});
 })();
+
+// Toggle info tooltips
+;(function(){
+	document.addEventListener('click', function(e){
+		const icon = e.target;
+		if(icon && icon.classList && icon.classList.contains('info-icon')){
+			const tooltipId = icon.getAttribute('data-info');
+			if(!tooltipId) return;
+			const tooltip = document.getElementById(tooltipId);
+			if(!tooltip) return;
+			const isHidden = tooltip.hasAttribute('hidden');
+			if(isHidden){
+				tooltip.removeAttribute('hidden');
+			} else {
+				tooltip.setAttribute('hidden','');
+			}
+		}
+	});
+})();

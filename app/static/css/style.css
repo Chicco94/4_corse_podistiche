@@ -488,3 +488,28 @@ select:focus {
     text-align: center;
     margin-top: 2rem;
 }
+
+/* Info Icons and Tooltips */
+.info-icon {
+    cursor: pointer;
+    display: inline-block;
+    margin-left: 0.5rem;
+    font-size: 1.1em;
+    color: #667eea;
+    transition: color 0.2s;
+}
+
+.info-icon:hover {
+    color: #764ba2;
+}
+
+.info-tooltip {
+    background-color: #f0f4ff;
+    border-left: 4px solid #667eea;
+    padding: 0.75rem 1rem;
+    margin: 0.75rem 0;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.5;
+}

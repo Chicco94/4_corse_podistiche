@@ -68,7 +68,8 @@
                     <form method="POST" action="{{ url_for('main.add_review', race_id=race.id) }}">
                     
                     <div class="form-group">
-                        <label for="route">Percorso Valutato:</label>
+                        <label for="route">Percorso Valutato: <span class="info-icon" data-info="percorso-valutato">ℹ️</span></label>
+                        <div class="info-tooltip" id="percorso-valutato" hidden>Seleziona quale distanza del percorso hai corso</div>
                         <select id="route" name="route" required>
                             <option value="">-- Seleziona un percorso --</option>
                             <option value="corto">Corto</option>
@@ -80,7 +81,8 @@
                     <h5>Valutazione Percorso</h5>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="rating_percorso_segnaletica">Segnaletica:</label>
+                            <label for="rating_percorso_segnaletica">Segnaletica: <span class="info-icon" data-info="segnaletica">ℹ️</span></label>
+                            <div class="info-tooltip" id="segnaletica" hidden>Valuta quanto il percorso era ben segnalato</div>
                             <select id="rating_percorso_segnaletica" name="rating_percorso_segnaletica">
                                 <option value="5">🚩🚩🚩🚩🚩 Eccellente</option>
                                 <option value="4">🚩🚩🚩🚩 Buono</option>
@@ -90,7 +92,8 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="rating_percorso_fondo">Fondo:</label>
+                            <label for="rating_percorso_fondo">Fondo: <span class="info-icon" data-info="fondo">ℹ️</span></label>
+                            <div class="info-tooltip" id="fondo" hidden>Valuta la qualità del terreno e della superficie</div>
                             <select id="rating_percorso_fondo" name="rating_percorso_fondo">
                                 <option value="5">🚩🚩🚩🚩🚩 Eccellente</option>
                                 <option value="4">🚩🚩🚩🚩 Buono</option>
@@ -100,7 +103,8 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="rating_percorso_distanza">Distanza:</label>
+                            <label for="rating_percorso_distanza">Distanza: <span class="info-icon" data-info="distanza">ℹ️</span></label>
+                            <div class="info-tooltip" id="distanza" hidden>Valuta se la distanza dichiarata era corretta</div>
                             <select id="rating_percorso_distanza" name="rating_percorso_distanza">
                                 <option value="5">🚩🚩🚩🚩🚩 Eccellente</option>
                                 <option value="4">🚩🚩🚩🚩 Buono</option>
@@ -114,7 +118,8 @@
                     <h5>Valutazione Ristori</h5>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="rating_ristori_numero">Numero:</label>
+                            <label for="rating_ristori_numero">Numero: <span class="info-icon" data-info="ristori-numero">ℹ️</span></label>
+                            <div class="info-tooltip" id="ristori-numero" hidden>Valuta il numero di ristori lungo il percorso</div>
                             <select id="rating_ristori_numero" name="rating_ristori_numero">
                                 <option value="5">🚩🚩🚩🚩🚩 Eccellente</option>
                                 <option value="4">🚩🚩🚩🚩 Buono</option>
@@ -124,7 +129,8 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="rating_ristori_varieta">Varietà:</label>
+                            <label for="rating_ristori_varieta">Varietà: <span class="info-icon" data-info="ristori-varieta">ℹ️</span></label>
+                            <div class="info-tooltip" id="ristori-varieta" hidden>Valuta la varietà di cibi e bevande offerti</div>
                             <select id="rating_ristori_varieta" name="rating_ristori_varieta">
                                 <option value="5">🚩🚩🚩🚩🚩 Eccellente</option>
                                 <option value="4">🚩🚩🚩🚩 Buono</option>
@@ -134,7 +140,8 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="rating_ristoro_abusivo">Ristori Abusivi:</label>
+                            <label for="rating_ristoro_abusivo">Ristori Abusivi: <span class="info-icon" data-info="ristori-abusivi">ℹ️</span></label>
+                            <div class="info-tooltip" id="ristori-abusivi" hidden>Valuta la qualità e disponibilità di ristori non ufficiali</div>
                             <select id="rating_ristoro_abusivo" name="rating_ristoro_abusivo">
                                 <option value="5">🚩🚩🚩🚩🚩 Eccellente</option>
                                 <option value="4">🚩🚩🚩🚩 Buono</option>
@@ -144,7 +151,8 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="rating_ristoro_finale">Ristoro Finale:</label>
+                            <label for="rating_ristoro_finale">Ristoro Finale: <span class="info-icon" data-info="ristoro-finale">ℹ️</span></label>
+                            <div class="info-tooltip" id="ristoro-finale" hidden>Valuta la qualità del ristoro al traguardo</div>
                             <select id="rating_ristoro_finale" name="rating_ristoro_finale">
                                 <option value="5">🚩🚩🚩🚩🚩 Eccellente</option>
                                 <option value="4">🚩🚩🚩🚩 Buono</option>
@@ -157,7 +165,8 @@
                     
                     <h5>Valutazione Extra</h5>
                     <div class="form-group">
-                        <label for="rating_extra_organizzazione">Organizzazione:</label>
+                        <label for="rating_extra_organizzazione">Organizzazione: <span class="info-icon" data-info="organizzazione">ℹ️</span></label>
+                        <div class="info-tooltip" id="organizzazione" hidden>Valuta l'organizzazione generale della gara</div>
                         <select id="rating_extra_organizzazione" name="rating_extra_organizzazione">
                             <option value="5">🚩🚩🚩🚩🚩 Eccellente</option>
                             <option value="4">🚩🚩🚩🚩 Buono</option>
@@ -168,7 +177,8 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="content">Note:</label>
+                        <label for="content">Note: <span class="info-icon" data-info="note">ℹ️</span></label>
+                        <div class="info-tooltip" id="note" hidden>Aggiungi commenti e osservazioni sulla tua esperienza</div>
                         <textarea 
                             id="content" 
                             name="content" 
