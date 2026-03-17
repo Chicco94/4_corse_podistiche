@@ -401,9 +401,26 @@ select:focus {
 }
 
 /* Collapsible review details */
-.review-summary { display:flex; align-items:center; gap:1rem; justify-content:space-between; }
-.review-average { font-weight:700; color:#ff8c00; }
-.toggle-details { flex-shrink:0; }
+.review-summary { 
+    display: flex; 
+    align-items: center; 
+    gap: 1rem; 
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.review-header {
+    flex: 1;
+    min-width: 200px;
+}
+.review-average { 
+    font-weight: 700; 
+    color: #ff8c00;
+    white-space: nowrap;
+}
+.toggle-details { 
+    flex-shrink: 0;
+    white-space: nowrap;
+}
 .review-details[hidden] { display:none; }
 .review-card.open { box-shadow: 0 8px 18px rgba(0,0,0,0.12); }
 
