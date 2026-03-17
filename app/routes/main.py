@@ -150,3 +150,8 @@ def add_review(race_id):
     db.session.commit()
     
     return redirect(url_for('main.race_detail', race_id=race_id))
+
+
+@bp.errorhandler(404)
+def page_not_found(e):
+    return redirect(url_for('main.index'))
