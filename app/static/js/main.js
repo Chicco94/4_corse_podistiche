@@ -17,9 +17,28 @@ console.log('App caricata correttamente');
 	}
 
 	const input = document.getElementById('race-filter');
+	const sortSelect = document.getElementById('race-sort');
 	if(!input) return;
 
 	const items = Array.from(document.querySelectorAll('.race-item'));
+	const raceList = document.querySelector('.race-list');
+
+	function getItemData(item){
+		return {
+			element: item,
+			name: item.querySelector('.race-name')?.textContent || '',
+			place: item.querySelector('.race-place')?.textContent || '',
+			meta: item.querySelector('.race-meta')?.textContent || '',
+			rating: parseFloat(item.querySelector('.race-average')?.textContent.split(' ')[1] || 0),
+			reviews: parseInt(item.querySelector('.race-count')?.textContent.match(/\d+/) || 0),
+			dateStr: item.querySelector('.race-meta')?.textContent.match(/\d{2}\/\d{2}\/\d{4}/)?.[0] || ''
+		};
+	}
+
+	function parseDate(dateStr){
+		const [d, m, y] = dateStr.split('/');
+		return new Date(y, m-1, d);
+	}
 
 	function filter(){
 		const q = normalize(input.value);
@@ -35,9 +54,42 @@ console.log('App caricata correttamente');
 			const matches = name.includes(q) || place.includes(q) || meta.includes(q);
 			item.style.display = matches ? '' : 'none';
 		});
+		sort();
+	}
+
+	function sort(){
+		const sortValue = sortSelect?.value || 'name-asc';
+		const visibleItems = items.filter(item => item.style.display !== 'none');
+		const itemsData = visibleItems.map(getItemData);
+
+		itemsData.sort((a, b) => {
+			switch(sortValue){
+				case 'name-asc':
+					return a.name.localeCompare(b.name);
+				case 'name-desc':
+					return b.name.localeCompare(a.name);
+				case 'rating-desc':
+					return b.rating - a.rating;
+				case 'rating-asc':
+					return a.rating - b.rating;
+				case 'date-desc':
+					return parseDate(b.dateStr) - parseDate(a.dateStr);
+				case 'date-asc':
+					return parseDate(a.dateStr) - parseDate(b.dateStr);
+				case 'reviews-desc':
+					return b.reviews - a.reviews;
+				default:
+					return 0;
+			}
+		});
+
+		itemsData.forEach(data => {
+			raceList.appendChild(data.element);
+		});
 	}
 
 	input.addEventListener('input', debounce(filter, 150));
+	if(sortSelect) sortSelect.addEventListener('change', sort);
 })();
 
 // Toggle review details (collapsible)

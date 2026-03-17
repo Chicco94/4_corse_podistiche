@@ -4,6 +4,15 @@
 <section class="races-section container">
     <div class="filter-box">
         <input id="race-filter" type="search" placeholder="Filtra per nome, luogo o autore..." aria-label="Filtra corse">
+        <select id="race-sort" aria-label="Ordina corse">
+            <option value="name-asc">Nome (A-Z)</option>
+            <option value="name-desc">Nome (Z-A)</option>
+            <option value="rating-desc">Valutazione (più alte)</option>
+            <option value="rating-asc">Valutazione (più basse)</option>
+            <option value="date-desc">Più recenti</option>
+            <option value="date-asc">Più vecchi</option>
+            <option value="reviews-desc">Più recensioni</option>
+        </select>
     </div>
     <h3 class="section-title">Corse registrate</h3>
     {% if races and races|length > 0 %}
