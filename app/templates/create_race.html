@@ -35,7 +35,16 @@
                 >
             </div>
             
-            <div class="form-actions">
+            <div class="form-group">
+                <label for="tipo_di_fondo">Tipo di Fondo (seleziona più opzioni se applicabile):</label>
+                <select id="tipo_di_fondo" name="tipo_di_fondo" multiple required>
+                    <option value="strada">Strada</option>
+                    <option value="sterrato">Sterratto</option>
+                    <option value="prato">Prato</option>
+                    <option value="sentiero collinare">Sentiero Collinare</option>
+                    <option value="sentiero alpino">Sentiero Alpino</option>
+                </select>
+            </div>
                 <button type="submit" class="btn btn-primary">Crea Gara</button>
                 <a href="{{ url_for('main.index') }}" class="btn btn-secondary">Annulla</a>
             </div>

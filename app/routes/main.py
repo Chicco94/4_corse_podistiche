@@ -65,17 +65,24 @@ def create_race():
     if request.method == 'POST':
         name = request.form.get('name', '').strip()
         place = request.form.get('place', '').strip()
+        tipo_di_fondo_list = request.form.getlist('tipo_di_fondo')
         
         # Validazione
         if not name:
             return render_template('create_race.html', error='Inserisci il nome della gara')
         if not place:
             return render_template('create_race.html', error='Inserisci il luogo della gara')
+        if not tipo_di_fondo_list:
+            return render_template('create_race.html', error='Seleziona almeno un tipo di fondo')
+        
+        # Unisci i tipi di fondo con ";"
+        tipo_di_fondo = ";".join(tipo_di_fondo_list)
         
         # Crea la gara
         race = Race(
             name=name,
             place=place,
+            tipo_di_fondo=tipo_di_fondo,
             creator_id=session['user_id']
         )
         db.session.add(race)

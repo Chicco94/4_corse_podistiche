@@ -7,6 +7,7 @@ class Race(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), nullable=False)
     place = db.Column(db.String(120), nullable=False)
+    tipo_di_fondo = db.Column(db.String(100), nullable=True)  # strada, sterrato, prato, sentiero collinare, sentiero alpino
     creator_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 

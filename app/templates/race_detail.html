@@ -7,6 +7,9 @@
     <div class="race-header">
         <h2>{{ race.name }}</h2>
         <p class="race-place">📍 {{ race.place }}</p>
+        {% if race.tipo_di_fondo %}
+            <p class="race-surface">🏞️ Tipo di fondo: {{ race.tipo_di_fondo.replace(';', ', ') }}</p>
+        {% endif %}
     </div>
     
     <div class="race-reviews">
