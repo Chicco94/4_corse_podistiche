@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS reviews (
     
     -- Percorso valutato
     route VARCHAR(120) NOT NULL,
+    edizione VARCHAR(120),
     
     -- Valutazione del percorso
     rating_percorso_segnaletica INT NOT NULL DEFAULT 5,

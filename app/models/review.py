@@ -11,6 +11,7 @@ class Review(db.Model):
 
     # Percorso valutato
     route = db.Column(db.String(120), nullable=False)
+    edizione = db.Column(db.String(120), nullable=True)  # Edizione della gara a cui si è partecipato
 
     # Valutazione del percorso
     rating_percorso_segnaletica = db.Column(db.Integer, nullable=False, default=5)

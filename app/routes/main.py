@@ -110,6 +110,7 @@ def add_review(race_id):
     
     # Estrai i dati dal form
     route = request.form.get('route', '').strip()
+    edizione = request.form.get('edizione', '').strip()
     content = request.form.get('content', '').strip()
     
     # Validazione
@@ -141,6 +142,7 @@ def add_review(race_id):
     # Crea la recensione
     review = Review(
         route=route,
+        edizione=edizione if edizione else None,
         content=content,
         rating_percorso_segnaletica=rating_percorso_segnaletica,
         rating_percorso_fondo=rating_percorso_fondo,

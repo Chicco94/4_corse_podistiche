@@ -24,6 +24,9 @@
                             <div class="review-header">
                                 <strong>{{ review.user.username }}</strong>
                                 <span class="review-route">{{ review.route }}</span>
+                                {% if review.edizione %}
+                                    <span class="review-edition">(Edizione {{ review.edizione }})</span>
+                                {% endif %}
                             </div>
                             <div class="review-average">🚩 {{ avg|round(1) }}/5</div>
                             <button type="button" class="btn btn-secondary toggle-details">Mostra dettagli</button>
@@ -79,6 +82,17 @@
                             <option value="medio">Medio</option>
                             <option value="lungo">Lungo</option>
                         </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="edizione">Edizione Partecipata: <span class="info-icon" data-info="edizione">ℹ️</span></label>
+                        <div class="info-tooltip" id="edizione" hidden>Inserisci l'anno o l'edizione della gara a cui hai partecipato (es. 2024, 2023 Special Edition)</div>
+                        <input 
+                            type="text" 
+                            id="edizione" 
+                            name="edizione" 
+                            placeholder="Es. 2024"
+                        >
                     </div>
                     
                     <h5>Valutazione Percorso</h5>

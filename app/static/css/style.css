@@ -344,6 +344,15 @@ select:focus {
     font-weight: bold;
 }
 
+.review-edition {
+    background: #fff3cd;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #856404;
+    font-style: italic;
+}
+
 .review-date {
     font-size: 0.85rem;
     color: #999;
