@@ -550,6 +550,31 @@ select:focus {
     margin-top: 2rem;
 }
 
+/* Floating create race button */
+.floating-create-race {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 1000;
+}
+
+.btn-fab {
+    border-radius: 999px;
+    padding: 0.95rem 1.25rem;
+    box-shadow: 0 10px 24px rgba(102, 126, 234, 0.18);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-fab:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(102, 126, 234, 0.26);
+}
+
+.races-section {
+    margin: 2rem 0;
+    padding-bottom: 6rem;
+}
+
 /* Info Icons and Tooltips */
 .info-icon {
     cursor: pointer;
