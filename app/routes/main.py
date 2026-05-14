@@ -30,18 +30,19 @@ def webhook():
 def login():
     if request.method == 'POST':
         username = request.form.get('username', '').strip()
+        password = request.form.get('password', '').strip()
         
         if not username:
             return render_template('login.html', error='Inserisci un nome utente')
+        if not password:
+            return render_template('login.html', error='Inserisci la password')
         
         # Cerca l'utente nel DB
         user = User.query.filter_by(username=username).first()
         
-        # Se non esiste, lo crea
-        if not user:
-            user = User(username=username)
-            db.session.add(user)
-            db.session.commit()
+        # Verifica la password
+        if not user or not user.check_password(password):
+            return render_template('login.html', error='Nome utente o password errati')
         
         # Salva l'utente nella sessione
         session['user_id'] = user.id
@@ -50,6 +51,40 @@ def login():
         return redirect(url_for('main.index'))
     
     return render_template('login.html')
+
+@bp.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form.get('username', '').strip()
+        password = request.form.get('password', '').strip()
+        password_confirm = request.form.get('password_confirm', '').strip()
+        
+        if not username:
+            return render_template('register.html', error='Inserisci un nome utente')
+        if not password:
+            return render_template('register.html', error='Inserisci una password')
+        if password != password_confirm:
+            return render_template('register.html', error='Le password non corrispondono')
+        if len(password) < 6:
+            return render_template('register.html', error='La password deve avere almeno 6 caratteri')
+        
+        # Verifica se l'utente esiste già
+        if User.query.filter_by(username=username).first():
+            return render_template('register.html', error='Il nome utente esiste già')
+        
+        # Crea il nuovo utente
+        user = User(username=username)
+        user.set_password(password)
+        db.session.add(user)
+        db.session.commit()
+        
+        # Salva l'utente nella sessione
+        session['user_id'] = user.id
+        session['username'] = user.username
+        
+        return redirect(url_for('main.index'))
+    
+    return render_template('register.html')
 
 @bp.route('/logout')
 def logout():
