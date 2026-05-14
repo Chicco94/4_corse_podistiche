@@ -28,7 +28,7 @@ class Race(db.Model):
             return None
         totals = 0.0
         for r in self.reviews:
-            # ogni recensione ha 8 valori di rating
+            # ogni recensione ha 9 valori di rating
             s = (
                 (r.rating_percorso_segnaletica or 0)
                 + (r.rating_percorso_fondo or 0)
@@ -38,6 +38,7 @@ class Race(db.Model):
                 + (r.rating_ristoro_abusivo or 0)
                 + (r.rating_ristoro_finale or 0)
                 + (r.rating_extra_organizzazione or 0)
+                + (r.rating_extra_parcheggio or 0)
             )
-            totals += (s / 8.0)
+            totals += (s / 9.0)
         return totals / len(self.reviews)

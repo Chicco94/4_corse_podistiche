@@ -18,7 +18,7 @@
         {% if race.reviews %}
             <div class="reviews-list">
                 {% for review in race.reviews %}
-                    {% set avg = (review.rating_percorso_segnaletica + review.rating_percorso_fondo + review.rating_percorso_distanza + review.rating_ristori_numero + review.rating_ristori_varieta + review.rating_ristoro_abusivo + review.rating_ristoro_finale + review.rating_extra_organizzazione) / 8.0 %}
+                    {% set avg = (review.rating_percorso_segnaletica + review.rating_percorso_fondo + review.rating_percorso_distanza + review.rating_ristori_numero + review.rating_ristori_varieta + review.rating_ristoro_abusivo + review.rating_ristoro_finale + review.rating_extra_organizzazione + review.rating_extra_parcheggio) / 9.0 %}
                     <div class="review-card">
                         <div class="review-summary">
                             <div class="review-header">
@@ -54,6 +54,7 @@
                                 <div class="rating-group">
                                     <h4>Extra</h4>
                                     <p>Organizzazione: 🚩 {{ review.rating_extra_organizzazione }}/5</p>
+                                    <p>Disponibilità parcheggio: 🚩 {{ review.rating_extra_parcheggio }}/5</p>
                                 </div>
                             </div>
                             
@@ -185,6 +186,17 @@
                         <label for="rating_extra_organizzazione">Organizzazione: <span class="info-icon" data-info="organizzazione">ℹ️</span></label>
                         <div class="info-tooltip" id="organizzazione" hidden>Valuta l'organizzazione generale della gara e l'eventuale presenza di extra</div>
                         <select id="rating_extra_organizzazione" name="rating_extra_organizzazione">
+                            <option value="5">🚩🚩🚩🚩🚩 Eccellente</option>
+                            <option value="4">🚩🚩🚩🚩 Buono</option>
+                            <option value="3">🚩🚩🚩 Normale</option>
+                            <option value="2">🚩🚩 Scadente</option>
+                            <option value="1">🚩 Pessimo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="rating_extra_parcheggio">Disponibilità parcheggio: <span class="info-icon" data-info="parcheggio">ℹ️</span></label>
+                        <div class="info-tooltip" id="parcheggio" hidden>Valuta quanto era facile trovare parcheggio vicino alla partenza</div>
+                        <select id="rating_extra_parcheggio" name="rating_extra_parcheggio">
                             <option value="5">🚩🚩🚩🚩🚩 Eccellente</option>
                             <option value="4">🚩🚩🚩🚩 Buono</option>
                             <option value="3">🚩🚩🚩 Normale</option>

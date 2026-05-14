@@ -26,6 +26,7 @@ class Review(db.Model):
 
     # Valutazione extra
     rating_extra_organizzazione = db.Column(db.Integer, nullable=False, default=5)
+    rating_extra_parcheggio = db.Column(db.Integer, nullable=False, default=5)
     
     # Note dell'utente
     content = db.Column(db.Text, nullable=False)

@@ -47,6 +47,7 @@ CREATE TABLE IF NOT EXISTS reviews (
     
     -- Valutazione extra
     rating_extra_organizzazione INT NOT NULL DEFAULT 5,
+    rating_extra_parcheggio INT NOT NULL DEFAULT 5,
     
     -- Note dell'utente
     content LONGTEXT NOT NULL,
@@ -67,6 +68,7 @@ ALTER TABLE reviews ADD CONSTRAINT check_ristori_varieta CHECK (rating_ristori_v
 ALTER TABLE reviews ADD CONSTRAINT check_ristoro_abusivo CHECK (rating_ristoro_abusivo >= 1 AND rating_ristoro_abusivo <= 5);
 ALTER TABLE reviews ADD CONSTRAINT check_ristoro_finale CHECK (rating_ristoro_finale >= 1 AND rating_ristoro_finale <= 5);
 ALTER TABLE reviews ADD CONSTRAINT check_extra_organizzazione CHECK (rating_extra_organizzazione >= 1 AND rating_extra_organizzazione <= 5);
+ALTER TABLE reviews ADD CONSTRAINT check_extra_parcheggio CHECK (rating_extra_parcheggio >= 1 AND rating_extra_parcheggio <= 5);
 
 -- Query di verifica (eseguire dopo la creazione)
 -- SELECT * FROM users;

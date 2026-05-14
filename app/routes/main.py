@@ -129,11 +129,12 @@ def add_review(race_id):
         rating_ristoro_abusivo = int(request.form.get('rating_ristoro_abusivo', 5))
         rating_ristoro_finale = int(request.form.get('rating_ristoro_finale', 5))
         rating_extra_organizzazione = int(request.form.get('rating_extra_organizzazione', 5))
+        rating_extra_parcheggio = int(request.form.get('rating_extra_parcheggio', 5))
         
         # Valida i rating (1-5)
         for rating in [rating_percorso_segnaletica, rating_percorso_fondo, rating_percorso_distanza,
                        rating_ristori_numero, rating_ristori_varieta, rating_ristoro_abusivo,
-                       rating_ristoro_finale, rating_extra_organizzazione]:
+                       rating_ristoro_finale, rating_extra_organizzazione, rating_extra_parcheggio]:
             if rating < 1 or rating > 5:
                 rating = 5
     except ValueError:
@@ -152,6 +153,7 @@ def add_review(race_id):
         rating_ristoro_abusivo=rating_ristoro_abusivo,
         rating_ristoro_finale=rating_ristoro_finale,
         rating_extra_organizzazione=rating_extra_organizzazione,
+        rating_extra_parcheggio=rating_extra_parcheggio,
         race_id=race_id,
         user_id=session['user_id']
     )
