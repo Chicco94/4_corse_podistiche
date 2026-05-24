@@ -24,28 +24,36 @@
                 >
             </div>
             
-            <div class="form-group">
+            <div class="form-group password-group">
                 <label for="password">Password:</label>
-                <input 
-                    type="password" 
-                    id="password" 
-                    name="password" 
-                    placeholder="Almeno 6 caratteri" 
-                    required
-                    minlength="6"
-                >
+                <div class="password-input-wrapper">
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        class="password-toggle"
+                        placeholder="Almeno 6 caratteri" 
+                        required
+                        minlength="6"
+                    >
+                    <button type="button" class="password-toggle-button" aria-label="Mostra password">👁</button>
+                </div>
             </div>
             
-            <div class="form-group">
+            <div class="form-group password-group">
                 <label for="password_confirm">Conferma Password:</label>
-                <input 
-                    type="password" 
-                    id="password_confirm" 
-                    name="password_confirm" 
-                    placeholder="Ripeti la password" 
-                    required
-                    minlength="6"
-                >
+                <div class="password-input-wrapper">
+                    <input 
+                        type="password" 
+                        id="password_confirm" 
+                        name="password_confirm" 
+                        class="password-toggle"
+                        placeholder="Ripeti la password" 
+                        required
+                        minlength="6"
+                    >
+                    <button type="button" class="password-toggle-button" aria-label="Mostra password">👁</button>
+                </div>
             </div>
             
             <button type="submit" class="btn btn-primary">Registrati</button>

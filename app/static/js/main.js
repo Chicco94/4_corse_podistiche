@@ -186,3 +186,23 @@ console.log('App caricata correttamente');
 		userMenuButton.setAttribute('aria-expanded', 'false');
 	});
 })();
+
+// Toggle password visibility
+;(function(){
+	const toggleButtons = document.querySelectorAll('.password-toggle-button');
+	if(!toggleButtons.length) return;
+
+	toggleButtons.forEach(button => {
+		button.addEventListener('click', function(){
+			const wrapper = button.closest('.password-input-wrapper');
+			if(!wrapper) return;
+			const input = wrapper.querySelector('.password-toggle');
+			if(!input) return;
+
+			const show = input.type === 'password';
+			input.type = show ? 'text' : 'password';
+			button.textContent = show ? '🙈' : '👁';
+			button.setAttribute('aria-label', show ? 'Nascondi password' : 'Mostra password');
+		});
+	});
+})();

@@ -204,6 +204,31 @@ body {
     transition: border-color 0.3s;
 }
 
+.password-input-wrapper {
+    position: relative;
+}
+
+.password-toggle {
+    padding-right: 3rem;
+}
+
+.password-toggle-button {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: #555;
+    font-size: 1.1rem;
+    padding: 0.25rem;
+}
+
+.password-toggle-button:hover {
+    color: #333;
+}
+
 .form-group input:focus {
     outline: none;
     border-color: #667eea;
