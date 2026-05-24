@@ -91,6 +91,35 @@ def logout():
     session.clear()
     return redirect(url_for('main.login'))
 
+@bp.route('/password/change', methods=['GET', 'POST'])
+def change_password():
+    if 'user_id' not in session:
+        return redirect(url_for('main.login'))
+
+    user = User.query.get(session['user_id'])
+    if request.method == 'POST':
+        current_password = request.form.get('current_password', '').strip()
+        new_password = request.form.get('new_password', '').strip()
+        new_password_confirm = request.form.get('new_password_confirm', '').strip()
+
+        if not current_password:
+            return render_template('change_password.html', error='Inserisci la password attuale')
+        if not new_password:
+            return render_template('change_password.html', error='Inserisci la nuova password')
+        if new_password != new_password_confirm:
+            return render_template('change_password.html', error='Le password non corrispondono')
+        if len(new_password) < 6:
+            return render_template('change_password.html', error='La password deve avere almeno 6 caratteri')
+        if not user.check_password(current_password):
+            return render_template('change_password.html', error='Password attuale non corretta')
+
+        user.set_password(new_password)
+        db.session.commit()
+
+        return render_template('change_password.html', success='Password aggiornata con successo')
+
+    return render_template('change_password.html')
+
 @bp.route('/races/new', methods=['GET', 'POST'])
 def create_race():
     # Verifica che l'utente sia loggato

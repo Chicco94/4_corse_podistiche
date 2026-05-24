@@ -161,3 +161,28 @@ console.log('App caricata correttamente');
 		}
 	});
 })();
+
+// Toggle user menu dropdown
+;(function(){
+	const userMenuButton = document.querySelector('.user-menu-button');
+	const userMenu = document.getElementById('user-menu-dropdown');
+	if(!userMenuButton || !userMenu) return;
+
+	userMenuButton.addEventListener('click', function(e){
+		e.preventDefault();
+		const isExpanded = userMenuButton.getAttribute('aria-expanded') === 'true';
+		if(isExpanded){
+			userMenu.setAttribute('hidden', '');
+			userMenuButton.setAttribute('aria-expanded', 'false');
+		} else {
+			userMenu.removeAttribute('hidden');
+			userMenuButton.setAttribute('aria-expanded', 'true');
+		}
+	});
+
+	document.addEventListener('click', function(e){
+		if(userMenu.contains(e.target) || userMenuButton.contains(e.target)) return;
+		userMenu.setAttribute('hidden', '');
+		userMenuButton.setAttribute('aria-expanded', 'false');
+	});
+})();

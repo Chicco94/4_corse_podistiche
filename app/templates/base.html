@@ -12,8 +12,16 @@
             <h1><a href="{{ url_for('main.index') }}">Corse Podistiche</a></h1>
             <div class="navbar-user">
                 {% if session.get('username') %}
-                    <span>Ciao, <strong>{{ session['username'] }}</strong></span>
-                    <a href="{{ url_for('main.logout') }}" class="btn-logout">Logout</a>
+                    <div class="user-menu">
+                        <button class="user-menu-button" type="button" aria-expanded="false" aria-controls="user-menu-dropdown">
+                            Ciao, <strong>{{ session['username'] }}</strong>
+                            <span class="burger-icon">☰</span>
+                        </button>
+                        <div id="user-menu-dropdown" class="user-menu-dropdown" hidden>
+                            <a href="{{ url_for('main.change_password') }}">Modifica password</a>
+                            <a href="{{ url_for('main.logout') }}">Logout</a>
+                        </div>
+                    </div>
                 {% else %}
                     <a href="{{ url_for('main.login') }}" class="btn-login">Login</a>
                 {% endif %}
